@@ -27,6 +27,22 @@ def connect_ssh(host, username, password, port=22):
         if output:
             print("Shell Output:")
             print(output)
+            # Check if output contains "-- hit any key to accept --"
+            if "-- hit any key to accept --" in output:
+                print("Detected '-- hit any key to accept --', sending newline...")
+                shell.send("\r\n")
+                time.sleep(1)  # Wait for additional output after sending newline
+
+                # Read additional output after sending newline
+                additional_output = ""
+                while shell.recv_ready():
+                    additional_output += shell.recv(1024).decode('utf-8')
+
+                if additional_output:
+                    print("Additional Output after sending newline:")
+                    print(additional_output)
+                else:
+                    print("No additional output received after sending newline")
         else:
             print("No initial output received from shell")
 
