@@ -26,6 +26,14 @@ The script will prompt for:
 3. Detects and handles "hit any key to accept" prompts
 4. Displays shell output
 
+## Installation
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install paramiko
+```
+
 ## Requirements
 
 - Python 3.x
